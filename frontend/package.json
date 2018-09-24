@@ -1,0 +1,46 @@
+{
+  "name": "shopgate-cliplister",
+  "version": "0.0.1",
+  "description": "Shopgate Cliplister implementation for Shopgate Connect",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "cover": "jest --cover"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shopgate/ext-cliplister.git"
+  },
+  "keywords": [
+    "shopgate",
+    "cliplister"
+  ],
+  "author": "Shopgate GmbH",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/shopgate/ext-cliplister/issues"
+  },
+  "homepage": "https://github.com/shopgate/ext-cliplister#readme",
+  "devDependencies": {
+    "@shopgate/eslint-config": "5.8.0",
+    "@shopgate/pwa-common": "5.8.0",
+    "@shopgate/pwa-common-commerce": "5.8.0",
+    "@shopgate/pwa-unit-test": "5.8.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-react-transform": "^3.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-inline-elements": "^6.22.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^23.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-hot-loader": "^4.3.3",
+    "react-transform-catch-errors": "^1.0.2",
+    "redbox-react": "^1.5.0"
+  }
+}
