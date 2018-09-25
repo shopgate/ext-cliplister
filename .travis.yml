@@ -10,5 +10,8 @@ install:
 before_script: touch ./config.json
 script: npm run cover --maxWorkers=4 --ci
 after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+branches:
+  only:
+  - master
 notifications:
   email: false
