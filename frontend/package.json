@@ -25,6 +25,7 @@
     "@shopgate/eslint-config": "5.8.0",
     "@shopgate/pwa-common": "5.8.0",
     "@shopgate/pwa-common-commerce": "5.8.0",
+    "@shopgate/pwa-core": "5.8.0",
     "@shopgate/pwa-unit-test": "5.8.0",
     "@shopgate/react-hammerjs": "^0.5.3",
     "babel-core": "^6.26.3",
