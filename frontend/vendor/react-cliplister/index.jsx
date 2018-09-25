@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { logger } from '@shopgate/pwa-core/helpers';
 import getCliplister from '../cliplister/viewer';
 
 const typeEAN = 'EAN'; // Cliplister id = 0 => Also, default identifier
@@ -8,7 +9,7 @@ const typeProductNumber = 'PRODUCT_NUMBER'; // Cliplister id = 10000 => Custom i
 /**
  * Cliplister viewer react wrapper.
  */
-class CliplisterViewer extends Component {
+class ReactCliplister extends Component {
   /**
    * Converts assetType to Cliplister asset id.
    * @param {string} type Human readable asset type.
@@ -70,7 +71,7 @@ class CliplisterViewer extends Component {
   componentDidMount() {
     getCliplister()
       .then((Cliplister) => {
-        Cliplister.Viewer({
+        this.viewer = Cliplister.Viewer({
           parentId: this.namespace,
           customer: this.props.customerNumber,
           assetKeys: [this.props.assetKey],
@@ -105,6 +106,9 @@ class CliplisterViewer extends Component {
             },
           },
         });
+      })
+      .catch((err) => {
+        logger.error('Could not get Cliplister.Viewer', err);
       });
   }
 
@@ -120,9 +124,10 @@ class CliplisterViewer extends Component {
    * Cleaning up.
    */
   componentWillUnmount() {
-    if (this.viewer) {
-      this.viewer.destruct();
+    if (!this.viewer) {
+      return;
     }
+    this.viewer.destruct();
   }
 
   /**
@@ -134,4 +139,4 @@ class CliplisterViewer extends Component {
   }
 }
 
-export default CliplisterViewer;
+export default ReactCliplister;

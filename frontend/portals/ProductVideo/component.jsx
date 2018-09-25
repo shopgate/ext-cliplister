@@ -5,8 +5,6 @@ import ReactCliplister from '../../vendor/react-cliplister';
 import styles from './style';
 import getConfig from '../../helpers/getConfig';
 
-const { customerNumber, assetType, slot } = getConfig();
-
 /**
  * Product video component.
  */
@@ -40,11 +38,24 @@ class ProductVideo extends Component {
   }
 
   /**
+   * @inheritDoc
+   */
+  constructor(props) {
+    super(props);
+
+    const { customerNumber, assetType, slot } = getConfig();
+    // Keeping this here for testing purposes.
+    this.customerNumber = customerNumber;
+    this.assetType = assetType;
+    this.slot = slot;
+  }
+
+  /**
    * Gets an asset key depenending on configured asset type (EAN or product id)
    * @returns {string|number}
    */
   getAssetKey() {
-    if (assetType === ReactCliplister.assetTypes.PRODUCT_NUMBER) {
+    if (this.assetType === ReactCliplister.assetTypes.PRODUCT_NUMBER) {
       return this.props.productData.id;
     }
 
@@ -57,24 +68,24 @@ class ProductVideo extends Component {
    */
   render() {
     if (!this.getAssetKey()) {
-      logger.warn('Shopgate Cliplister: no asset key provided.', assetType);
+      logger.warn('Shopgate Cliplister: no asset key provided.', this.assetType);
       return null;
     }
     const assetKey = this.getAssetKey();
     logger.log('Shopgate Cliplister: trying to init with params', {
-      customerNumber,
+      customerNumber: this.customerNumber,
+      assetType: this.assetType,
+      slot: this.slot,
       assetKey,
-      assetType,
-      slot,
     });
 
     return (
       <div className={styles.wrapper}>
         <ReactCliplister
-          customerNumber={customerNumber}
+          customerNumber={this.customerNumber}
           assetKey={assetKey}
-          assetType={assetType}
-          slot={slot}
+          assetType={this.assetType}
+          slot={this.slot}
         />
       </div>
     );

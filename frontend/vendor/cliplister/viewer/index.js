@@ -15,6 +15,7 @@ function inject() {
 function tryCliplister(resolve) {
   if (window.Cliplister) {
     resolve(window.Cliplister);
+
     return;
   }
   setTimeout(() => {
