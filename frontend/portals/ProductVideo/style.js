@@ -1,7 +1,7 @@
 import { css } from 'glamor';
 import { themeConfig } from '@shopgate/pwa-common/helpers/config/index';
 
-const { colors, variables } = themeConfig;
+const { variables } = themeConfig;
 
 const wrapper = css({
   margin: `${variables.gap.small}px 0`,
@@ -9,4 +9,4 @@ const wrapper = css({
 
 export default {
   wrapper,
-}
+};
