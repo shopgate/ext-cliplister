@@ -57,14 +57,22 @@ class ProductVideo extends Component {
    */
   render() {
     if (!this.getAssetKey()) {
-      logger.warn('Shopgate cliplister: no asset key provided.', assetType);
+      logger.warn('Shopgate Cliplister: no asset key provided.', assetType);
       return null;
     }
+    const assetKey = this.getAssetKey();
+    logger.log('Shopgate Cliplister: trying to init with params', {
+      customerNumber,
+      assetKey,
+      assetType,
+      slot,
+    });
+
     return (
       <div className={styles.wrapper}>
         <ReactCliplister
           customerNumber={customerNumber}
-          assetKey={this.getAssetKey()}
+          assetKey={assetKey}
           assetType={assetType}
           slot={slot}
         />

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getCliplister from '../cliplister/viewer';
 
-const typeEAN = 'EAN';
-const typeProductNumber = 'PRODUCT_NUMBER';
+const typeEAN = 'EAN'; // Cliplister id = 0 => Also, default identifier
+const typeProductNumber = 'PRODUCT_NUMBER'; // Cliplister id = 10000 => Custom identifier.
 
 /**
  * Cliplister viewer react wrapper.
