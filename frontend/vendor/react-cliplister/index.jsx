@@ -127,7 +127,7 @@ class ReactCliplister extends Component {
     if (!this.viewer) {
       return;
     }
-    this.viewer.destruct();
+    this.viewer.destroy();
   }
 
   /**

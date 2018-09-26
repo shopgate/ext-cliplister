@@ -29,7 +29,7 @@ describe('ReactCliplister', () => {
           mockedViewerConstruct(...args);
 
           return {
-            destruct: () => mockedViewerDestruct(),
+            destroy: () => mockedViewerDestruct(),
           };
         },
       });
@@ -87,7 +87,7 @@ describe('ReactCliplister', () => {
       />));
       setTimeout(() => {
         expect(mockedLoggerError).toHaveBeenCalled();
-        // No viewer, would throw if .destruct is called.
+        // No viewer, would throw if .destroy is called.
         component.unmount();
         done();
       }, 0);
