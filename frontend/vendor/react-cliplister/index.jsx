@@ -23,38 +23,32 @@ class ReactCliplister extends Component {
    * Prop types
    * @returns {Object}
    */
-  static get propTypes() {
-    return {
-      customerNumber: PropTypes.number.isRequired,
-      assetKey: PropTypes.string.isRequired,
-      assetType: PropTypes.oneOf([
-        typeEAN,
-        typeProductNumber,
-      ]).isRequired,
-      slot: PropTypes.number,
-    };
-  }
+  static propTypes = {
+    assetKey: PropTypes.string.isRequired,
+    assetType: PropTypes.oneOf([
+      typeEAN,
+      typeProductNumber,
+    ]).isRequired,
+    customerNumber: PropTypes.number.isRequired,
+    slot: PropTypes.number,
+  };
 
   /**
    * Possible asset types.
    * @returns {Object}
    */
-  static get assetTypes() {
-    return {
-      EAN: typeEAN,
-      PRODUCT_NUMBER: typeProductNumber,
-    };
-  }
+  static assetTypes = {
+    EAN: typeEAN,
+    PRODUCT_NUMBER: typeProductNumber,
+  };
 
   /**
    * Default props.
    * @returns {Object}
    */
-  static get defaultProps() {
-    return {
-      slot: 0,
-    };
-  }
+  static defaultProps = {
+    slot: 0,
+  };
 
   /**
    * @inheritDoc

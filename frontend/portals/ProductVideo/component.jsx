@@ -13,28 +13,24 @@ class ProductVideo extends Component {
    * Prop types.
    * @returns {Object}
    */
-  static get propTypes() {
-    return {
-      productData: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        identifiers: PropTypes.shape({
-          ean: PropTypes.string,
-        }),
+  static propTypes = {
+    productData: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      identifiers: PropTypes.shape({
+        ean: PropTypes.string,
       }),
-    };
+    }),
   }
 
   /**
    * Default props
    * @returns {Object}
    */
-  static get defaultProps() {
-    return {
-      productData: {
-        id: null,
-        identifiers: {},
-      },
-    };
+  static defaultProps = {
+    productData: {
+      id: null,
+      identifiers: {},
+    },
   }
 
   /**
@@ -56,10 +52,10 @@ class ProductVideo extends Component {
    */
   getAssetKey() {
     if (this.assetType === ReactCliplister.assetTypes.PRODUCT_NUMBER) {
-      return this.props.productData.id;
+      return this.props.productData.id || null;
     }
 
-    return this.props.productData.identifiers.ean;
+    return this.props.productData.identifiers.ean || null;
   }
 
   /**
