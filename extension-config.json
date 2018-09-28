@@ -1,0 +1,48 @@
+{
+  "version": "0.1.0-beta.2",
+  "id": "@shopgate/cliplister",
+  "components": [
+    {
+      "id": "Subscribers",
+      "type": "subscribers",
+      "path": "frontend/subscribers"
+    },
+    {
+      "id": "ProductVideo",
+      "type": "portals",
+      "path": "frontend/portals/ProductVideo",
+      "target": "product.description.before"
+    }
+  ],
+  "configuration": {
+    "customerNumber": {
+      "type": "admin",
+      "destination": "both",
+      "params": {
+        "required": true,
+        "type": "number",
+        "label": "Cliplister customer number"
+      }
+    },
+    "assetType": {
+      "type": "admin",
+      "destination": "both",
+      "default": "EAN",
+      "params": {
+        "required": false,
+        "type": "text",
+        "label": "Video search key: (EAN or PRODUCT_NUMBER)"
+      }
+    },
+    "slot": {
+      "type": "admin",
+      "destination": "both",
+      "default": 0,
+      "params": {
+        "required": false,
+        "type": "number",
+        "label": "Slot"
+      }
+    }
+  }
+}
