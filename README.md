@@ -1,7 +1,7 @@
 # Shopgate Connect - Extension Cliplister
 [![GitHub license](http://dmlc.github.io/img/apache2.svg)](LICENSE.md)
-[![Build Status](https://travis-ci.org/shopgate/cliplister.svg?branch=master)](https://travis-ci.org/shopgate/cliplister)
-[![Coverage Status](https://coveralls.io/repos/github/shopgate/cliplister/badge.svg?branch=master)](https://coveralls.io/github/shopgate/cliplister?branch=master)
+[![Build Status](https://travis-ci.org/shopgate/ext-cliplister.svg?branch=master)](https://travis-ci.org/shopgate/ext-cliplister)
+[![Coverage Status](https://coveralls.io/repos/github/shopgate/ext-cliplister/badge.svg?branch=master)](https://coveralls.io/github/shopgate/ext-cliplister?branch=master)
 
 [Cliplister](https://cliplister.com) implementation for [Shopgate Connect](https://developer.shopgate.com) platform.
 
