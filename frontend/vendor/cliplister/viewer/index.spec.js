@@ -1,6 +1,8 @@
 import getCliplister from './index';
 
 const mockedCliplister = {};
+let promise;
+
 describe('Cliplister Viewer - dependency injection', () => {
   const mockedCreateElement = jest.fn();
   beforeAll(() => {
@@ -21,15 +23,17 @@ describe('Cliplister Viewer - dependency injection', () => {
   it('should inject script', (done) => {
     // Setting up a flag that tells us that promise was not fulfilled (as expected).
     let promiseDone = false;
-    // Call the function to start everything.
-    getCliplister()
-      .then((value) => {
-        promiseDone = true;
-        // The returned value should be a reference of what we defined in previous tick.
-        expect(value).toBe(mockedCliplister);
+    // Call the function to start everything. Keep the promise ref for later test.
+    promise = getCliplister();
 
-        done();
-      });
+    promise.then((value) => {
+      promiseDone = true;
+      // The returned value should be a reference of what we defined in previous tick.
+      expect(value).toBe(mockedCliplister);
+
+      done();
+    });
+
     // There should be immediate script injection.
     expect(mockedCreateElement).toHaveBeenCalled();
     expect(document.body.appendChild).toHaveBeenCalled();
@@ -43,5 +47,11 @@ describe('Cliplister Viewer - dependency injection', () => {
         value: mockedCliplister,
       });
     }, 0);
+  });
+
+  it('should return same promise as before', () => {
+    const secondPromise = getCliplister();
+
+    expect(promise === secondPromise).toBe(true);
   });
 });
