@@ -19,13 +19,6 @@ class MockedReactCliplister extends ReactCliplister {
   componentDidMount() {
     // Do nothing.
   }
-
-  /**
-   * Override of default componentWillUnmount.
-   */
-  componentWillUnmount() {
-    // Do nothing.
-  }
 }
 
 export default MockedReactCliplister;

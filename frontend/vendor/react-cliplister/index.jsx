@@ -60,12 +60,43 @@ class ReactCliplister extends Component {
   }
 
   /**
+   * The onPlay callback. It does two things:
+   * 1. Makes sure the <video> parent div is above the controls container. Otherwise on iOS it's
+   * impossible to use any native controls on second render, because the controls container has some
+   * js/css problem and constantly flickers on top of the video blocking user input.
+   * 2. Unmutes the video. This works around the issue that there is no "mute" button on ios native
+   * video element.
+   */
+  handlePlay = () => {
+    try {
+      this.viewer.unmute();
+      document.getElementById(this.namespace)
+        .querySelector('div.cliplister-viewer > div:last-child').style.zIndex = 1;
+    } catch (err) {
+      logger.error('HandlePlay error', err);
+    }
+  }
+
+  /**
+   * Cleans up after handlePlay workarounds.
+   */
+  handleStop = () => {
+    try {
+      this.viewer.mute();
+      document.getElementById(this.namespace)
+        .querySelector('div.cliplister-viewer > div:last-child').style.zIndex = 0;
+    } catch (err) {
+      logger.error('HandleStop error', err);
+    }
+  };
+
+  /**
    * Prepares the viewer which injects the cliplister DOM into the namespaced container.
    */
   componentDidMount() {
     getCliplister()
       .then((Cliplister) => {
-        this.viewer = Cliplister.Viewer({
+        this.viewer = new Cliplister.Viewer({
           parentId: this.namespace,
           customer: this.props.customerNumber,
           assetKeys: [this.props.assetKey],
@@ -100,6 +131,10 @@ class ReactCliplister extends Component {
             },
           },
         });
+
+        this.viewer.onPlay(this.handlePlay);
+        this.viewer.onStop(this.handleStop);
+        this.viewer.onPause(this.handleStop);
       })
       .catch((err) => {
         logger.error('Could not get Cliplister.Viewer', err);
@@ -121,6 +156,7 @@ class ReactCliplister extends Component {
     if (!this.viewer) {
       return;
     }
+    this.viewer.stop();
     this.viewer.destroy();
   }
 

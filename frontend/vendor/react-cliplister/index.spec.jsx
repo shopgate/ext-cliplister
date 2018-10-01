@@ -3,6 +3,12 @@ import { mount } from 'enzyme';
 import ReactCliplister from './index';
 
 const mockedViewerDestruct = jest.fn();
+const mockedViewerStop = jest.fn();
+const mockedViewerOnPlay = jest.fn();
+const mockedViewerOnStop = jest.fn();
+const mockedViewerOnPause = jest.fn();
+const mockedViewerMute = jest.fn();
+const mockedViewerUnmute = jest.fn();
 const mockedViewerConstruct = jest.fn();
 /**
  * Mocked viewer promise resolver.
@@ -30,10 +36,20 @@ describe('ReactCliplister', () => {
 
           return {
             destroy: () => mockedViewerDestruct(),
+            stop: () => mockedViewerStop(),
+            mute: () => mockedViewerMute(),
+            unmute: () => mockedViewerUnmute(),
+            onPause: (...args) => mockedViewerOnPause(...args),
+            onStop: (...args) => mockedViewerOnStop(...args),
+            onPlay: (...args) => mockedViewerOnPlay(...args),
           };
         },
       });
     });
+
+    beforeEach(() => {
+      mockedLoggerError.mockClear();
+    })
 
     // Order matters in this test!
     let component;
@@ -56,6 +72,16 @@ describe('ReactCliplister', () => {
       expect(mockedLoggerError).not.toHaveBeenCalled();
     });
 
+    it('should manipulate the video on play/pause/stop and log error since there is no DOM', () => {
+      const instance = component.instance();
+      instance.handlePlay();
+      expect(mockedViewerUnmute).toHaveBeenCalled();
+      instance.handleStop();
+      expect(mockedViewerMute).toHaveBeenCalled();
+
+      expect(mockedLoggerError).toHaveBeenCalledTimes(2);
+    });
+
     it('should handle Viewer lifecycle', () => {
       expect(mockedViewerConstruct).toHaveBeenCalledWith(expect.objectContaining({
         customer: 100,
@@ -65,7 +91,16 @@ describe('ReactCliplister', () => {
         keyType: 0,
         slot: 1,
       }));
+
+      // Binds to <video> callbacks.
+      expect(mockedViewerOnPlay).toHaveBeenCalledWith(component.instance().handlePlay);
+      expect(mockedViewerOnStop).toHaveBeenCalledWith(component.instance().handleStop);
+      expect(mockedViewerOnPause).toHaveBeenCalledWith(component.instance().handleStop);
+
+      // Unmount the component.
       component.unmount();
+
+      // Clean up called.
       expect(mockedViewerDestruct).toHaveBeenCalled();
       expect(mockedLoggerError).not.toHaveBeenCalled();
     });
