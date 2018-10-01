@@ -26,6 +26,9 @@ jest.mock('@shopgate/pwa-core/helpers', () => ({
   },
 }));
 
+let mockedIsiOS = true;
+jest.mock('../../helpers/isiOSPlatform', () => () => mockedIsiOS);
+
 describe('ReactCliplister', () => {
   describe('Optimistic workflow', () => {
     beforeAll(() => {
@@ -39,8 +42,11 @@ describe('ReactCliplister', () => {
             stop: () => mockedViewerStop(),
             mute: () => mockedViewerMute(),
             unmute: () => mockedViewerUnmute(),
+            // eslint-disable-next-line no-shadow
             onPause: (...args) => mockedViewerOnPause(...args),
+            // eslint-disable-next-line no-shadow
             onStop: (...args) => mockedViewerOnStop(...args),
+            // eslint-disable-next-line no-shadow
             onPlay: (...args) => mockedViewerOnPlay(...args),
           };
         },
@@ -49,7 +55,9 @@ describe('ReactCliplister', () => {
 
     beforeEach(() => {
       mockedLoggerError.mockClear();
-    })
+      mockedViewerMute.mockClear();
+      mockedViewerUnmute.mockClear();
+    });
 
     // Order matters in this test!
     let component;
@@ -79,6 +87,17 @@ describe('ReactCliplister', () => {
       expect(mockedViewerMute).toHaveBeenCalled();
 
       expect(mockedLoggerError).toHaveBeenCalledTimes(2);
+    });
+
+    it('should NOT manipulate video when platform is not iOS', () => {
+      const instance = component.instance();
+      mockedIsiOS = false;
+      instance.handlePlay();
+      expect(mockedViewerUnmute).not.toHaveBeenCalled();
+      instance.handleStop();
+      expect(mockedViewerMute).not.toHaveBeenCalled();
+
+      expect(mockedLoggerError).not.toHaveBeenCalled();
     });
 
     it('should handle Viewer lifecycle', () => {
