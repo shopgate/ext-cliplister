@@ -59,7 +59,6 @@ describe('ReactCliplister', () => {
           customerNumber={100}
           assetKey="ASSET_KEY"
           assetType={ReactCliplister.assetTypes.EAN}
-          slot={1}
         />
       ));
       const namespaceArr = component.find('div').props().id.split('-');
@@ -89,7 +88,6 @@ describe('ReactCliplister', () => {
           'ASSET_KEY',
         ],
         keyType: 0,
-        slot: 1,
       }));
 
       // Binds to <video> callbacks.

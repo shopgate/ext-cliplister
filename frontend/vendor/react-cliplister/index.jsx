@@ -30,7 +30,6 @@ class ReactCliplister extends Component {
       typeProductNumber,
     ]).isRequired,
     customerNumber: PropTypes.number.isRequired,
-    slot: PropTypes.number,
   };
 
   /**
@@ -40,14 +39,6 @@ class ReactCliplister extends Component {
   static assetTypes = {
     EAN: typeEAN,
     PRODUCT_NUMBER: typeProductNumber,
-  };
-
-  /**
-   * Default props.
-   * @returns {Object}
-   */
-  static defaultProps = {
-    slot: 0,
   };
 
   /**
@@ -105,7 +96,6 @@ class ReactCliplister extends Component {
             width: '100%',
             aspectRatio: 'asset',
           },
-          slot: this.props.slot,
           plugins: {
             ClickableVideo: {
               layer: 1,
