@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import MockedReactCliplister from '../../vendor/react-cliplister/mock';
 
 const mockedCustomerNumber = 1000;
-const mockedSlot = 1;
 let mockedAssetType = 'EAddN';
 
 jest.mock('../../config', () => ({
@@ -11,7 +10,6 @@ jest.mock('../../config', () => ({
     return mockedAssetType;
   },
   customerNumber: mockedCustomerNumber,
-  slot: mockedSlot,
 }));
 
 const mockedLoggerLog = jest.fn();
@@ -54,7 +52,6 @@ describe('ProductVideo', () => {
       customerNumber: mockedCustomerNumber,
       assetKey: assetType === 'EAN' ? 'EAN-NUMBER' : 'productId',
       assetType: mockedAssetType,
-      slot: mockedSlot,
     });
     expect(mockedLoggerLog).toHaveBeenCalled();
     expect(mockedLoggerWarn).not.toHaveBeenCalled();

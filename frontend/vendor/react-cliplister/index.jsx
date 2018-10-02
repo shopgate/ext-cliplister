@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { logger } from '@shopgate/pwa-core/helpers';
 import getCliplister from '../cliplister/viewer';
+import isiOSPlatform from '../../helpers/isiOSPlatform';
 
 const typeEAN = 'EAN'; // Cliplister id = 0 => Also, default identifier
 const typeProductNumber = 'PRODUCT_NUMBER'; // Cliplister id = 10000 => Custom identifier.
@@ -30,7 +31,6 @@ class ReactCliplister extends Component {
       typeProductNumber,
     ]).isRequired,
     customerNumber: PropTypes.number.isRequired,
-    slot: PropTypes.number,
   };
 
   /**
@@ -40,14 +40,6 @@ class ReactCliplister extends Component {
   static assetTypes = {
     EAN: typeEAN,
     PRODUCT_NUMBER: typeProductNumber,
-  };
-
-  /**
-   * Default props.
-   * @returns {Object}
-   */
-  static defaultProps = {
-    slot: 0,
   };
 
   /**
@@ -65,7 +57,7 @@ class ReactCliplister extends Component {
   componentDidMount() {
     getCliplister()
       .then((Cliplister) => {
-        this.viewer = Cliplister.Viewer({
+        this.viewer = new Cliplister.Viewer({
           parentId: this.namespace,
           customer: this.props.customerNumber,
           assetKeys: [this.props.assetKey],
@@ -74,7 +66,6 @@ class ReactCliplister extends Component {
             width: '100%',
             aspectRatio: 'asset',
           },
-          slot: this.props.slot,
           plugins: {
             ClickableVideo: {
               layer: 1,
@@ -100,6 +91,10 @@ class ReactCliplister extends Component {
             },
           },
         });
+
+        this.viewer.onPlay(this.handlePlay);
+        this.viewer.onStop(this.handleStop);
+        this.viewer.onPause(this.handleStop);
       })
       .catch((err) => {
         logger.error('Could not get Cliplister.Viewer', err);
@@ -121,8 +116,48 @@ class ReactCliplister extends Component {
     if (!this.viewer) {
       return;
     }
+    this.viewer.stop();
     this.viewer.destroy();
   }
+
+  /**
+   * The onPlay callback. It does two things:
+   * 1. Makes sure the <video> parent div is above the controls container. Otherwise on iOS it's
+   * impossible to use any native controls on second render, because the controls container has some
+   * js/css problem and constantly flickers on top of the video blocking user input.
+   * 2. Unmutes the video. This works around the issue that there is no "mute" button on ios native
+   * video element.
+   */
+  handlePlay = () => {
+    try {
+      // Non iOS devices show Cliplister controls. Workaround only for iOS.
+      if (!isiOSPlatform()) {
+        return;
+      }
+      this.viewer.unmute();
+      document.getElementById(this.namespace)
+        .querySelector('div.cliplister-viewer > div:last-child').style.zIndex = 1;
+    } catch (err) {
+      logger.error('HandlePlay error', err);
+    }
+  }
+
+  /**
+   * Cleans up after handlePlay workarounds.
+   */
+  handleStop = () => {
+    try {
+      // Non iOS devices show Cliplister controls. Workaround only for iOS.
+      if (!isiOSPlatform()) {
+        return;
+      }
+      this.viewer.mute();
+      document.getElementById(this.namespace)
+        .querySelector('div.cliplister-viewer > div:last-child').style.zIndex = 0;
+    } catch (err) {
+      logger.error('HandleStop error', err);
+    }
+  };
 
   /**
    * Renders.

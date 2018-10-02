@@ -39,11 +39,10 @@ class ProductVideo extends Component {
   constructor(props) {
     super(props);
 
-    const { customerNumber, assetType, slot } = getConfig();
+    const { customerNumber, assetType } = getConfig();
     // Keeping this here for testing purposes.
     this.customerNumber = customerNumber;
     this.assetType = assetType;
-    this.slot = slot;
   }
 
   /**
@@ -71,7 +70,6 @@ class ProductVideo extends Component {
     logger.log('Shopgate Cliplister: trying to init with params', {
       customerNumber: this.customerNumber,
       assetType: this.assetType,
-      slot: this.slot,
       assetKey,
     });
 
@@ -81,7 +79,6 @@ class ProductVideo extends Component {
           customerNumber={this.customerNumber}
           assetKey={assetKey}
           assetType={this.assetType}
-          slot={this.slot}
         />
       </div>
     );

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "id": "@shopgate/cliplister",
   "components": [
     {
@@ -32,16 +32,6 @@
         "required": false,
         "type": "text",
         "label": "Video search key: (EAN or PRODUCT_NUMBER)"
-      }
-    },
-    "slot": {
-      "type": "admin",
-      "destination": "both",
-      "default": 0,
-      "params": {
-        "required": false,
-        "type": "number",
-        "label": "Slot"
       }
     }
   }
