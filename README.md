@@ -5,7 +5,7 @@
 
 [Cliplister](https://cliplister.com) implementation for [Shopgate Connect](https://developer.shopgate.com) platform.
 
-## Instalation
+## Installation
 ### Domains
 In order to make this extension work correctly the cliplister account must whitelist following domains:
 - connect.shopgate.com
