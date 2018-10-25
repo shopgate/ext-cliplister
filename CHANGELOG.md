@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Updated readme with domain whitelisting information
 ## [1.0.1] - 2018-10-02
 ### Fixed
 - On iOS there is a workaround executed that makes the <video> element always being rendered on top of the Cliplister container. It's needed since Cliplister doesn't render its own controls on iOS, but the container which usually contains them is rendered on top of the <video> element which makes the natives controls not reachable for user. It happens however only starting from second render of the page containing Cliplister video.

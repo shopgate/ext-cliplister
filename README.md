@@ -5,6 +5,16 @@
 
 [Cliplister](https://cliplister.com) implementation for [Shopgate Connect](https://developer.shopgate.com) platform.
 
+## Installation
+### Domains
+In order to make this extension work correctly the cliplister account must whitelist following domains:
+- connect.shopgate.com
+- sandbox.cdn.connect.shopgate.com
+
+### Configuration
+- `customerNumber` - Cliplister customer number (required)
+- `assetType` - Video search key: (EAN or PRODUCT_NUMBER) (optional, defaults to EAN)
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) file for more information.
