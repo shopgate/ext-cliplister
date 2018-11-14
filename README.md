@@ -13,8 +13,19 @@ In order to make this extension work correctly the cliplister account must white
 - sandbox.cdn.connect.shopgate.com
 
 ### Configuration
-- `customerNumber` - Cliplister customer number (required)
-- `assetType` - Video search key: (EAN or PRODUCT_NUMBER) (optional, defaults to EAN)
+
+Set the following values in your Shopgate Connect Admin:
+* `customerNumber` - (number) Cliplister customer number (required)
+* `assetType` - (text) Video search key: (EAN or PRODUCT_NUMBER) (optional, defaults to EAN)
+
+#### Example
+
+```json
+{
+    "customerNumber": 12345,
+    "assetType": "PRODUCT_NUMBER"
+}
+```
 
 ## Changelog
 
