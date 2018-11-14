@@ -1,5 +1,6 @@
-# Shopgate Connect - Extension Cliplister
-[![GitHub license](http://dmlc.github.io/img/apache2.svg)](LICENSE.md)
+# Shopgate Connect - Cliplister Extension
+
+[![GitHub license](http://dmlc.github.io/img/apache2.svg)](LICENSE)
 [![Build Status](https://travis-ci.org/shopgate/ext-cliplister.svg?branch=master)](https://travis-ci.org/shopgate/ext-cliplister)
 [![Coverage Status](https://coveralls.io/repos/github/shopgate/ext-cliplister/badge.svg?branch=master)](https://coveralls.io/github/shopgate/ext-cliplister?branch=master)
 
@@ -33,6 +34,6 @@ apps and mobile websites for the iPhone, iPad, Android smartphones and tablets.
 
 ## License
 
-Shopgate Connect - Cliplister is available under the Apache License, Version 2.0.
+This extension is available under the Apache License, Version 2.0.
 
-See the [LICENSE](./LICENSE.md) file for more information.
+See the [LICENSE](./LICENSE) file for more information.
