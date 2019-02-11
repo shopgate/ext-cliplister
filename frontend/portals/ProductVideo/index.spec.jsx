@@ -1,5 +1,11 @@
+import React from 'react';
+
 jest.mock('@shopgate/pwa-common-commerce/product/selectors/product', () => ({
-  getCurrentBaseProduct: () => 'MOCKED_RETURN',
+  getBaseProduct: () => 'MOCKED_RETURN',
+}));
+
+jest.mock('@shopgate/pwa-extension-kit/connectors', () => ({
+  withPageProductId: WrappedComponent => props => <WrappedComponent {...props} />,
 }));
 
 const mockedConnect = jest.fn();

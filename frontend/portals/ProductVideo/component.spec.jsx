@@ -16,11 +16,11 @@ const mockedLoggerLog = jest.fn();
 const mockedLoggerWarn = jest.fn();
 const mockedLoggerError = jest.fn();
 
-jest.mock('@shopgate/pwa-core/helpers', () => ({
-  logger: {
-    log: (...args) => mockedLoggerLog(...args),
-    warn: (...args) => mockedLoggerWarn(...args),
-    error: (...args) => mockedLoggerError(...args),
+jest.mock('@shopgate/pwa-extension-kit/helpers', () => ({
+  TaggedLogger: class TaggedLogger {
+    log = (...args) => mockedLoggerLog(...args);
+    warn = (...args) => mockedLoggerWarn(...args);
+    error = (...args) => mockedLoggerError(...args);
   },
 }));
 
