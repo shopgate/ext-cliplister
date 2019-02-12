@@ -48,10 +48,13 @@ class ProductVideo extends Component {
   }
 
   /**
-   * Gets an asset key depenending on configured asset type (EAN or product id)
+   * Gets an asset key depending on configured asset type (EAN or product id)
    * @returns {string|number}
    */
   getAssetKey() {
+    if (!this.props.productData) {
+      return null;
+    }
     if (this.assetType === ReactCliplister.assetTypes.PRODUCT_NUMBER) {
       return this.props.productData.id || null;
     }
