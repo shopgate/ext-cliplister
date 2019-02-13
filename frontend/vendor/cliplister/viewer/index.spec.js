@@ -16,6 +16,7 @@ describe('Cliplister Viewer - dependency injection', () => {
 
           return {};
         },
+        addEventListener: () => {},
       },
     });
   });

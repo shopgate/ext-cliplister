@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { logger } from '@shopgate/pwa-core/helpers';
+import { TaggedLogger } from '@shopgate/pwa-extension-kit/helpers';
 import getCliplister from '../cliplister/viewer';
 import isiOSPlatform from '../../helpers/isiOSPlatform';
 
 const typeEAN = 'EAN'; // Cliplister id = 0 => Also, default identifier
 const typeProductNumber = 'PRODUCT_NUMBER'; // Cliplister id = 10000 => Custom identifier.
 
+const logger = new TaggedLogger('ReactCliplister');
 /**
  * Cliplister viewer react wrapper.
  */

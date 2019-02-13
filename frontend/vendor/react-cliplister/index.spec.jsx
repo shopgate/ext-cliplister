@@ -20,9 +20,9 @@ jest.mock('../cliplister/viewer', () => () => new Promise((resolve, reject) => {
 }));
 
 const mockedLoggerError = jest.fn();
-jest.mock('@shopgate/pwa-core/helpers', () => ({
-  logger: {
-    error: (...args) => mockedLoggerError(...args),
+jest.mock('@shopgate/pwa-extension-kit/helpers', () => ({
+  TaggedLogger: class {
+    error = (...args) => mockedLoggerError(...args);
   },
 }));
 

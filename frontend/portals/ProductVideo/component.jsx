@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { logger } from '@shopgate/pwa-core/helpers';
+import { TaggedLogger } from '@shopgate/pwa-extension-kit/helpers';
 import ReactCliplister from '../../vendor/react-cliplister';
 import styles from './style';
 import getConfig from '../../helpers/getConfig';
+
+const logger = new TaggedLogger('ShopgateCliplister');
 
 /**
  * Product video component.
@@ -46,10 +48,13 @@ class ProductVideo extends Component {
   }
 
   /**
-   * Gets an asset key depenending on configured asset type (EAN or product id)
+   * Gets an asset key depending on configured asset type (EAN or product id)
    * @returns {string|number}
    */
   getAssetKey() {
+    if (!this.props.productData) {
+      return null;
+    }
     if (this.assetType === ReactCliplister.assetTypes.PRODUCT_NUMBER) {
       return this.props.productData.id || null;
     }
@@ -63,11 +68,11 @@ class ProductVideo extends Component {
    */
   render() {
     if (!this.getAssetKey()) {
-      logger.warn('Shopgate Cliplister: no asset key provided.', this.assetType);
+      logger.warn('No asset key provided.', this.assetType);
       return null;
     }
     const assetKey = this.getAssetKey();
-    logger.log('Shopgate Cliplister: trying to init with params', {
+    logger.log('Trying to init with params', {
       customerNumber: this.customerNumber,
       assetType: this.assetType,
       assetKey,

@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
-import { getCurrentBaseProduct } from '@shopgate/pwa-common-commerce/product/selectors/product';
+import { getBaseProduct } from '@shopgate/pwa-common-commerce/product/selectors/product';
 
 /**
  * Maps state to props.
  * @param {Object} state Current state.
+ * @param {Object} props Props.
  * @returns {Object}
  */
-const mapStateToProps = state => ({
-  productData: getCurrentBaseProduct(state),
+const mapStateToProps = (state, props) => ({
+  productData: getBaseProduct(state, props),
 });
 
 export default connect(mapStateToProps);
